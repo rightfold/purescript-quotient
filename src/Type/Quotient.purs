@@ -9,6 +9,7 @@ module Type.Quotient
   , runQuotient
   ) where
 
+import Prelude
 import Type.Proxy (Proxy(..))
 
 --------------------------------------------------------------------------------
@@ -33,3 +34,12 @@ mkQuotient = Quotient
 -- | cannot observe distinct wrappees.
 runQuotient :: ∀ a e. Canonical a e => a / e -> a
 runQuotient (Quotient a) = canonical (Proxy :: Proxy e) a
+
+instance eqQuotient :: (Eq a, Canonical a e) => Eq (a / e) where
+  eq a b = eq (runQuotient a) (runQuotient b)
+
+instance ordQuotient :: (Ord a, Canonical a e) => Ord (a / e) where
+  compare a b = compare (runQuotient a) (runQuotient b)
+
+instance showQuotient :: (Show a, Canonical a e) => Show (a / e) where
+  show a = "(mkQuotient " <> show a <> ")"
