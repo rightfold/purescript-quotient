@@ -26,10 +26,10 @@ newtype Quotient a e = Quotient a
 infixl 9 type Quotient as /
 
 -- | Pair a value with an equivalence relation.
-mkQuotient :: ∀ a e. a -> Quotient a e
+mkQuotient :: ∀ a e. a -> a / e
 mkQuotient = Quotient
 
 -- | Canonicalize a value using an equivalence relation such that the caller
 -- | cannot observe distinct wrappees.
-runQuotient :: ∀ a e. Canonical a e => Quotient a e -> a
+runQuotient :: ∀ a e. Canonical a e => a / e -> a
 runQuotient (Quotient a) = canonical (Proxy :: Proxy e) a
