@@ -15,6 +15,7 @@ module Type.Quotient
 
 import Data.Ord (abs)
 import Prelude
+import Test.QuickCheck (class Arbitrary, class Coarbitrary, arbitrary, coarbitrary)
 import Type.Nat1 (kind Nat1, class IsNat1, N1Proxy(..), reifyNat1)
 import Type.Proxy (Proxy(..))
 
@@ -49,6 +50,12 @@ instance ordQuotient :: (Ord a, Canonical a e) => Ord (a / e) where
 
 instance showQuotient :: (Show a, Canonical a e) => Show (a / e) where
   show a = "(mkQuotient " <> show a <> ")"
+
+instance arbitraryQuotient :: (Arbitrary a, Canonical a e) => Arbitrary (a / e) where
+  arbitrary = mkQuotient <$> arbitrary
+
+instance coarbitraryQuotient :: (Coarbitrary a, Canonical a e) => Coarbitrary (a / e) where
+  coarbitrary = coarbitrary <<< runQuotient
 
 --------------------------------------------------------------------------------
 
