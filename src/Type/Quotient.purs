@@ -104,7 +104,7 @@ foreign import data Mod512 :: Type
 foreign import data Mod1024 :: Type
 
 instance canonicalId :: Canonical a Id where
-  canonical _ = id
+  canonical _ = identity
 
 instance canonicalAbs :: (Ord a, Ring a) => Canonical a Abs where
   canonical _ = abs
