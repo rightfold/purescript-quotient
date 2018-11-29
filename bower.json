@@ -6,8 +6,8 @@
     "url": "https://github.com/rightfold/purescript-quotient.git"
   },
   "dependencies": {
-    "purescript-prelude": "^3.0.0",
-    "purescript-proxy": "^2.0.0",
-    "purescript-quickcheck": "^4.0.0"
+    "purescript-prelude": "^4.0.0",
+    "purescript-proxy": "^3.0.0",
+    "purescript-quickcheck": "^5.0.0"
   }
 }

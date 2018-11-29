@@ -22,8 +22,10 @@ module Type.Quotient
   , Mod1024
   ) where
 
-import Data.Ord (abs)
 import Prelude
+
+import Data.Int (rem)
+import Data.Ord (abs)
 import Test.QuickCheck (class Arbitrary, class Coarbitrary, arbitrary, coarbitrary)
 import Type.Proxy (Proxy(..))
 
@@ -104,37 +106,37 @@ foreign import data Mod512 :: Type
 foreign import data Mod1024 :: Type
 
 instance canonicalId :: Canonical a Id where
-  canonical _ = id
+  canonical _ = identity
 
 instance canonicalAbs :: (Ord a, Ring a) => Canonical a Abs where
   canonical _ = abs
 
 instance canonicalMod2 :: Canonical Int Mod2 where
-  canonical _ = abs <<< (_ `mod` 2)
+  canonical _ = abs <<< (_ `rem` 2)
 
 instance canonicalMod4 :: Canonical Int Mod4 where
-  canonical _ = abs <<< (_ `mod` 4)
+  canonical _ = abs <<< (_ `rem` 4)
 
 instance canonicalMod8 :: Canonical Int Mod8 where
-  canonical _ = abs <<< (_ `mod` 8)
+  canonical _ = abs <<< (_ `rem` 8)
 
 instance canonicalMod16 :: Canonical Int Mod16 where
-  canonical _ = abs <<< (_ `mod` 16)
+  canonical _ = abs <<< (_ `rem` 16)
 
 instance canonicalMod32 :: Canonical Int Mod32 where
-  canonical _ = abs <<< (_ `mod` 32)
+  canonical _ = abs <<< (_ `rem` 32)
 
 instance canonicalMod64 :: Canonical Int Mod64 where
-  canonical _ = abs <<< (_ `mod` 64)
+  canonical _ = abs <<< (_ `rem` 64)
 
 instance canonicalMod128 :: Canonical Int Mod128 where
-  canonical _ = abs <<< (_ `mod` 128)
+  canonical _ = abs <<< (_ `rem` 128)
 
 instance canonicalMod256 :: Canonical Int Mod256 where
-  canonical _ = abs <<< (_ `mod` 256)
+  canonical _ = abs <<< (_ `rem` 256)
 
 instance canonicalMod512 :: Canonical Int Mod512 where
-  canonical _ = abs <<< (_ `mod` 512)
+  canonical _ = abs <<< (_ `rem` 512)
 
 instance canonicalMod1024 :: Canonical Int Mod1024 where
-  canonical _ = abs <<< (_ `mod` 1024)
+  canonical _ = abs <<< (_ `rem` 1024)

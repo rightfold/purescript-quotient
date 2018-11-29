@@ -1,2 +1,8 @@
-/bower_components
-/output
+/.*
+!/.gitignore
+!/.eslintrc.json
+!/.travis.yml
+/bower_components/
+/node_modules/
+/output/
+package-lock.json
