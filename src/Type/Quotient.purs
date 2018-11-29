@@ -23,6 +23,7 @@ module Type.Quotient
   ) where
 
 import Prelude
+
 import Data.Int (rem)
 import Data.Ord (abs)
 import Test.QuickCheck (class Arbitrary, class Coarbitrary, arbitrary, coarbitrary)
