@@ -49,9 +49,11 @@ module Type.Quotient
 
 import Prelude
 
+import Data.Int (rem)
 import Data.Ord (abs)
 import Test.QuickCheck (class Arbitrary, class Coarbitrary, arbitrary, coarbitrary)
 import Type.Proxy (Proxy(..))
+import Unsafe.Coerce (unsafeCoerce)
 
 --------------------------------------------------------------------------------
 
@@ -209,97 +211,97 @@ instance canonicalAbs :: (Ord a, Ring a) => Canonical a Abs where
   canonical _ = abs
 
 instance canonicalMod2 :: Canonical Int Mod2 where
-  canonical _ = abs <<< (_ `mod` 2)
+  canonical _ = abs <<< (_ `rem` 2)
 
 instance canonicalMod4 :: Canonical Int Mod4 where
-  canonical _ = abs <<< (_ `mod` 4)
+  canonical _ = abs <<< (_ `rem` 4)
 
 instance canonicalMod8 :: Canonical Int Mod8 where
-  canonical _ = abs <<< (_ `mod` 8)
+  canonical _ = abs <<< (_ `rem` 8)
 
 instance canonicalMod16 :: Canonical Int Mod16 where
-  canonical _ = abs <<< (_ `mod` 16)
+  canonical _ = abs <<< (_ `rem` 16)
 
 instance canonicalMod32 :: Canonical Int Mod32 where
-  canonical _ = abs <<< (_ `mod` 32)
+  canonical _ = abs <<< (_ `rem` 32)
 
 instance canonicalMod64 :: Canonical Int Mod64 where
-  canonical _ = abs <<< (_ `mod` 64)
+  canonical _ = abs <<< (_ `rem` 64)
 
 instance canonicalMod128 :: Canonical Int Mod128 where
-  canonical _ = abs <<< (_ `mod` 128)
+  canonical _ = abs <<< (_ `rem` 128)
 
 instance canonicalMod256 :: Canonical Int Mod256 where
-  canonical _ = abs <<< (_ `mod` 256)
+  canonical _ = abs <<< (_ `rem` 256)
 
 instance canonicalMod512 :: Canonical Int Mod512 where
-  canonical _ = abs <<< (_ `mod` 512)
+  canonical _ = abs <<< (_ `rem` 512)
 
 instance canonicalMod1024 :: Canonical Int Mod1024 where
-  canonical _ = abs <<< (_ `mod` 1024)
+  canonical _ = abs <<< (_ `rem` 1024)
 
 instance canonicalMod2048 :: Canonical Int Mod2048 where
-  canonical _ = abs <<< (_ `mod` 2048)
+  canonical _ = abs <<< (_ `rem` 2048)
 
 instance canonicalMod4096 :: Canonical Int Mod4096 where
-  canonical _ = abs <<< (_ `mod` 4096)
+  canonical _ = abs <<< (_ `rem` 4096)
 
 instance canonicalMod8192 :: Canonical Int Mod8192 where
-  canonical _ = abs <<< (_ `mod` 8192)
+  canonical _ = abs <<< (_ `rem` 8192)
 
 instance canonicalMod16384 :: Canonical Int Mod16384 where
-  canonical _ = abs <<< (_ `mod` 16384)
+  canonical _ = abs <<< (_ `rem` 16384)
 
 instance canonicalMod32768 :: Canonical Int Mod32768 where
-  canonical _ = abs <<< (_ `mod` 32768)
+  canonical _ = abs <<< (_ `rem` 32768)
 
 instance canonicalMod65536 :: Canonical Int Mod65536 where
-  canonical _ = abs <<< (_ `mod` 65536)
+  canonical _ = abs <<< (_ `rem` 65536)
 
 instance canonicalMod131072 :: Canonical Int Mod131072 where
-  canonical _ = abs <<< (_ `mod` 131072)
+  canonical _ = abs <<< (_ `rem` 131072)
 
 instance canonicalMod262144 :: Canonical Int Mod262144 where
-  canonical _ = abs <<< (_ `mod` 262144)
+  canonical _ = abs <<< (_ `rem` 262144)
 
 instance canonicalMod524288 :: Canonical Int Mod524288 where
-  canonical _ = abs <<< (_ `mod` 524288)
+  canonical _ = abs <<< (_ `rem` 524288)
 
 instance canonicalMod1048576 :: Canonical Int Mod1048576 where
-  canonical _ = abs <<< (_ `mod` 1048576)
+  canonical _ = abs <<< (_ `rem` 1048576)
 
 instance canonicalMod2097152 :: Canonical Int Mod2097152 where
-  canonical _ = abs <<< (_ `mod` 2097152)
+  canonical _ = abs <<< (_ `rem` 2097152)
 
 instance canonicalMod4194304 :: Canonical Int Mod4194304 where
-  canonical _ = abs <<< (_ `mod` 4194304)
+  canonical _ = abs <<< (_ `rem` 4194304)
 
 instance canonicalMod8388608 :: Canonical Int Mod8388608 where
-  canonical _ = abs <<< (_ `mod` 8388608)
+  canonical _ = abs <<< (_ `rem` 8388608)
 
 instance canonicalMod16777216 :: Canonical Int Mod16777216 where
-  canonical _ = abs <<< (_ `mod` 16777216)
+  canonical _ = abs <<< (_ `rem` 16777216)
 
 instance canonicalMod33554432 :: Canonical Int Mod33554432 where
-  canonical _ = abs <<< (_ `mod` 33554432)
+  canonical _ = abs <<< (_ `rem` 33554432)
 
 instance canonicalMod67108864 :: Canonical Int Mod67108864 where
-  canonical _ = abs <<< (_ `mod` 67108864)
+  canonical _ = abs <<< (_ `rem` 67108864)
 
 instance canonicalMod134217728 :: Canonical Int Mod134217728 where
-  canonical _ = abs <<< (_ `mod` 134217728)
+  canonical _ = abs <<< (_ `rem` 134217728)
 
 instance canonicalMod268435456 :: Canonical Int Mod268435456 where
-  canonical _ = abs <<< (_ `mod` 268435456)
+  canonical _ = abs <<< (_ `rem` 268435456)
 
 instance canonicalMod536870912 :: Canonical Int Mod536870912 where
-  canonical _ = abs <<< (_ `mod` 536870912)
+  canonical _ = abs <<< (_ `rem` 536870912)
 
 instance canonicalMod1073741824 :: Canonical Int Mod1073741824 where
-  canonical _ = abs <<< (_ `mod` 1073741824)
+  canonical _ = abs <<< (_ `rem` 1073741824)
 
 instance canonicalMod2147483648 :: Canonical Number Mod2147483648 where
-  canonical _ = abs <<< (_ `mod` 2147483648.0)
+  canonical _ = abs <<< (\x -> unsafeCoerce $ unsafeCoerce x `rem` unsafeCoerce 2147483648.0)
 
 instance canonicalMod4294967296 :: Canonical Number Mod4294967296 where
-  canonical _ = abs <<< (_ `mod` 4294967296.0)
+  canonical _ = abs <<< (\x -> unsafeCoerce $ unsafeCoerce x `rem` unsafeCoerce 4294967296.0)
