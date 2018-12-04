@@ -20,5 +20,6 @@ for (1 .. 32) {
 
 for (1 .. 32) {
     printf "  log \"    - Int / Mod%d:\"\n", 2 ** $_;
-    printf "  quickCheck (idempotent :: Int / Mod%d -> Boolean)\n", 2 ** $_;
+    printf "  quickCheck (idempotent (Proxy :: Proxy Mod%d))\n", 2 ** $_;
+    printf "\n";
 }

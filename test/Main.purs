@@ -1,7 +1,7 @@
 module Test.Main where
 
 import Type.Quotient
-  ( Quotient, class Canonical, runQuotient, mkQuotient, type (/)
+  ( Quotient, class Canonical, canonical, runQuotient, mkQuotient, type (/)
   , Id
   , Abs
   , Mod2
@@ -41,84 +41,91 @@ import Type.Quotient
 import Prelude
 import Effect (Effect)
 import Effect.Console (log)
-import Test.QuickCheck (quickCheck)
+import Test.QuickCheck (quickCheck, (===), Result)
+import Type.Proxy (Proxy (..))
 
 
 
 main :: Effect Unit
 main = do
   log "Running tests..."
-  log "  - idempotent: ∀ x. run x == run (mk (run x))"
-  log "    - Int / Id:"
-  quickCheck (idempotent :: Int / Id -> Boolean)
-  log "    - Int / Abs:"
-  quickCheck (idempotent :: Int / Abs -> Boolean)
+  idempotentTests
+
+
+
+idempotentTests :: Effect Unit
+idempotentTests = do
+  log "  - idempotent: ∀ (x :: a where Canonical a e). canonical x == canonical (canonical x)"
   log "    - Int / Mod2:"
-  quickCheck (idempotent :: Int / Mod2 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod2))
   log "    - Int / Mod4:"
-  quickCheck (idempotent :: Int / Mod4 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod4))
   log "    - Int / Mod8:"
-  quickCheck (idempotent :: Int / Mod8 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod8))
   log "    - Int / Mod16:"
-  quickCheck (idempotent :: Int / Mod16 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod16))
   log "    - Int / Mod32:"
-  quickCheck (idempotent :: Int / Mod32 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod32))
   log "    - Int / Mod64:"
-  quickCheck (idempotent :: Int / Mod64 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod64))
   log "    - Int / Mod128:"
-  quickCheck (idempotent :: Int / Mod128 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod128))
   log "    - Int / Mod256:"
-  quickCheck (idempotent :: Int / Mod256 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod256))
   log "    - Int / Mod512:"
-  quickCheck (idempotent :: Int / Mod512 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod512))
   log "    - Int / Mod1024:"
-  quickCheck (idempotent :: Int / Mod1024 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod1024))
   log "    - Int / Mod2048:"
-  quickCheck (idempotent :: Int / Mod2048 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod2048))
   log "    - Int / Mod4096:"
-  quickCheck (idempotent :: Int / Mod4096 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod4096))
   log "    - Int / Mod8192:"
-  quickCheck (idempotent :: Int / Mod8192 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod8192))
   log "    - Int / Mod16384:"
-  quickCheck (idempotent :: Int / Mod16384 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod16384))
   log "    - Int / Mod32768:"
-  quickCheck (idempotent :: Int / Mod32768 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod32768))
   log "    - Int / Mod65536:"
-  quickCheck (idempotent :: Int / Mod65536 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod65536))
   log "    - Int / Mod131072:"
-  quickCheck (idempotent :: Int / Mod131072 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod131072))
   log "    - Int / Mod262144:"
-  quickCheck (idempotent :: Int / Mod262144 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod262144))
   log "    - Int / Mod524288:"
-  quickCheck (idempotent :: Int / Mod524288 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod524288))
   log "    - Int / Mod1048576:"
-  quickCheck (idempotent :: Int / Mod1048576 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod1048576))
   log "    - Int / Mod2097152:"
-  quickCheck (idempotent :: Int / Mod2097152 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod2097152))
   log "    - Int / Mod4194304:"
-  quickCheck (idempotent :: Int / Mod4194304 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod4194304))
   log "    - Int / Mod8388608:"
-  quickCheck (idempotent :: Int / Mod8388608 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod8388608))
   log "    - Int / Mod16777216:"
-  quickCheck (idempotent :: Int / Mod16777216 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod16777216))
   log "    - Int / Mod33554432:"
-  quickCheck (idempotent :: Int / Mod33554432 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod33554432))
   log "    - Int / Mod67108864:"
-  quickCheck (idempotent :: Int / Mod67108864 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod67108864))
   log "    - Int / Mod134217728:"
-  quickCheck (idempotent :: Int / Mod134217728 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod134217728))
   log "    - Int / Mod268435456:"
-  quickCheck (idempotent :: Int / Mod268435456 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod268435456))
   log "    - Int / Mod536870912:"
-  quickCheck (idempotent :: Int / Mod536870912 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod536870912))
   log "    - Int / Mod1073741824:"
-  quickCheck (idempotent :: Int / Mod1073741824 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod1073741824))
   log "    - Number / Mod2147483648:"
-  quickCheck (idempotent :: Number / Mod2147483648 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod2147483648))
   log "    - Number / Mod4294967296:"
-  quickCheck (idempotent :: Number / Mod4294967296 -> Boolean)
+  quickCheck (idempotent (Proxy :: Proxy Mod4294967296))
 
-
-idempotent :: ∀ a e. Canonical a e => Eq a => Quotient a e -> Boolean
-idempotent x =
-  runQuotient x == runQuotient (mkQuotient (runQuotient x) :: a / e)
+idempotent :: ∀ a e
+            . Show a
+           => Canonical a e
+           => Eq a
+           => Proxy e -> a -> Result
+idempotent p x =
+  let can = canonical p
+  in  can x === can (can x)
