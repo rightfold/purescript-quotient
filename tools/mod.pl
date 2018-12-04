@@ -17,3 +17,8 @@ for (1 .. 32) {
   printf "  canonical _ = abs <<< (_ `mod` %d)\n", 2 ** $_;
   printf "\n";
 }
+
+for (1 .. 32) {
+    printf "  log \"    - Int / Mod%d:\"\n", 2 ** $_;
+    printf "  quickCheck (idempotent :: Int / Mod%d -> Boolean)\n", 2 ** $_;
+}
